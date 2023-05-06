@@ -11,3 +11,8 @@ jobs:
         with:
           name: c2_Classifier_Sentiment_Model
           path: output/c2_Classifier_Sentiment_Model.joblib
+      - name: Upload BoW model
+        uses: actions/upload-artifact@v2
+        with:
+          name: c1_BoW_Sentiment_Model
+          path: output/c1_BoW_Sentiment_Model.pkl
