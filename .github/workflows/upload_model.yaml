@@ -1,0 +1,13 @@
+name: Upload model
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Upload model
+        uses: actions/upload-artifact@v2
+        with:
+          name: c2_Classifier_Sentiment_Model
+          path: output/c2_Classifier_Sentiment_Model.joblib
