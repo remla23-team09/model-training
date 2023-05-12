@@ -29,7 +29,6 @@ def _text_process(data):
     review = review.split()
     review = [ps.stem(word) for word in review if not word in set(all_stopwords)]
     review = ' '.join(review)
-
     return review
 
 def _preprocess(reviews):
