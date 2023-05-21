@@ -1,3 +1,4 @@
+# local package
 notebook
 numpy==1.20.2
 pandas==1.2.4
@@ -5,3 +6,11 @@ nltk==3.6.1
 scipy==1.6.2
 matplotlib==3.4.1
 scikit-learn==1.2.2
+
+# external requirements
+click
+Sphinx
+coverage
+# awscli
+flake8
+python-dotenv
