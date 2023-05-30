@@ -1,0 +1,31 @@
+schema: '2.0'
+stages:
+  process:
+    cmd: python ./src/data/make_dataset.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+      ./data/processed/processed_data.joblib
+    deps:
+    - path: ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+      md5: 3f26df4f8a0a991bb3e084a122046eea
+      size: 55656
+    - path: ./src/data/make_dataset.py
+      md5: 604f6c2936314c1f0e074b24779fe720
+      size: 2772
+    outs:
+    - path: ./data/processed/processed_data.joblib
+      md5: b9ebf24cdaf8211af925afe954c6ecf4
+      size: 10224225
+  train:
+    cmd: python3 ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+      ./data/processed/processed_data.joblib ./models/sentiment_model.joblib
+    deps:
+    - path: ./data/processed/processed_data.joblib
+      md5: b9ebf24cdaf8211af925afe954c6ecf4
+      size: 10224225
+    - path: ./src/models/train_model.py
+      md5: 1b8baeef616593b764b5d7310a2d6c4e
+      size: 1502
+    outs:
+    - path: ./models/sentiment_model.joblib
+      md5: 2d5a3a7cc92e92406be4edf52dd19be0
+      size: 46215
+      isexec: true
