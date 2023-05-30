@@ -1,7 +1,7 @@
 import click
 import pandas as pd
 import pickle
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import AutoModelForSequenceClassification
 
 
 pd.set_option('display.max_colwidth', None)
