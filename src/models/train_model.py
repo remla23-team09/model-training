@@ -3,11 +3,17 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump, load
 from sklearn.naive_bayes import GaussianNB
-from src.data.make_dataset import _load_data
 from sklearn.metrics import confusion_matrix, accuracy_score
 
 pd.set_option('display.max_colwidth', None)
 
+def _load_data(input_filepath):
+    reviews = pd.read_csv(
+        input_filepath,
+        sep='\t',
+        quoting=3
+    )
+    return reviews
 
 @click.command()
 @click.argument('processed_data_filepath', type=click.Path(exists=True))

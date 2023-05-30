@@ -40,6 +40,7 @@ lint:
 
 ## Train a model
 train:
+	$(PYTHON_INTERPRETER) src/models/train_twt_roberta_model.py models/twt_roberta_sentiment_model.pkl
 	$(PYTHON_INTERPRETER) src/models/train_model.py data/raw/a1_RestaurantReviews_HistoricDump.tsv data/processed/processed_data.joblib models/sentiment_model.joblib
 
 ## Upload Data to S3
