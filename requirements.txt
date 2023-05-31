@@ -16,4 +16,8 @@ coverage
 # awscli
 flake8
 python-dotenv
-mllint
+pylint==2.12.2
+mypy
+black
+isort
+bandit
