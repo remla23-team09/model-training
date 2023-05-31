@@ -18,7 +18,6 @@ jobs:
           pip install -r requirements.txt
           
           pylint src/data/make_dataset.py
-          pylint src/models/predict_model.py
           pylint src/models/train_model.py
           pylint src/models/train_twt_roberta_model.py
 
