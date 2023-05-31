@@ -43,25 +43,25 @@ def _text_process(data):
 
 def _preprocess(reviews, output_filepath):
 
-    cv = CountVectorizer(max_features=1420)
+    count_vectorizer = CountVectorizer(max_features=1420)
 
     corpus = []
     for i in range(0, 900):
         corpus.append(_text_process(reviews['Review'][i]))
 
-    preprocessed_data = cv.fit_transform(corpus).toarray()
+    preprocessed_data = count_vectorizer.fit_transform(corpus).toarray()
 
     bow_path = 'data/interim/c1_BoW_Sentiment_Model.pkl'
-    pickle.dump(cv, open(bow_path, "wb"))
+    pickle.dump(count_vectorizer, open(bow_path, "wb"))
 
     dump(preprocessed_data, output_filepath)
     return preprocessed_data
 
 
 def prepare(review):
-    cvFile = '../../data/interim/c1_BoW_Sentiment_Model.pkl'
-    cv = pickle.load(open(cvFile, "rb"))
-    processed_input = cv.transform([review]).toarray()[0]
+    bag_of_words = '../../data/interim/c1_BoW_Sentiment_Model.pkl'
+    count_vectorizer = pickle.load(open(bag_of_words, "rb"))
+    processed_input = count_vectorizer.transform([review]).toarray()[0]
     return processed_input
 
 
