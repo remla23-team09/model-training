@@ -25,3 +25,11 @@ Pull the files from the DVC remote:
 Run the pipeline:
 - `dvc repro`
 
+To run the experiment:
+- `dvc exp run`
+
+To see the difference in the accuracy metric:
+- `dvc metrics diff`
+
+To see the experiment log:
+- `dvc exp show`

@@ -15,3 +15,6 @@ stages:
     - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
     outs:
     - ./models/sentiment_model.joblib
+    metrics:
+      - metrics.json:
+          cache: false
