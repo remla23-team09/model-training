@@ -31,7 +31,7 @@ def main(processed_data_filepath, raw_data_filepath, model_output_filepath):
                                         X,
                                         y,
                                         test_size=0.20,
-                                        random_state=0
+                                        random_state=5
                                         )
 
     # Train the model

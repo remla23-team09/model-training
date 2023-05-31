@@ -8,15 +8,14 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/data/make_dataset.py
-      md5: 604f6c2936314c1f0e074b24779fe720
-      size: 2772
+      md5: bcf00ac7fae096bf380ce57744127b21
+      size: 2854
     outs:
     - path: ./data/processed/processed_data.joblib
       md5: b9ebf24cdaf8211af925afe954c6ecf4
       size: 10224225
   train:
-    cmd: "python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_sentiment_model.pkl\n
-      python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+    cmd: "python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
       ./data/processed/processed_data.joblib ./models/sentiment_model.joblib\n"
     deps:
     - path: ./data/processed/processed_data.joblib
@@ -26,12 +25,12 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/models/train_model.py
-      md5: 5a2b22e75517c2097dc036f2bfd4fbda
-      size: 1607
+      md5: e0cd00031bba0beea07e218c8ed060bd
+      size: 1769
     outs:
     - path: ./models/sentiment_model.joblib
-      md5: 2d5a3a7cc92e92406be4edf52dd19be0
+      md5: 649615810f57033e7b806a0be21c75e0
       size: 46215
-    - path: ./models/twt_roberta_sentiment_model.pkl
-      md5: 1df9b64a3f14ba538a65a569f9455a2f
-      size: 498697062
+    - path: metrics.json
+      md5: b687424ba324800f72bd06751070c065
+      size: 32
