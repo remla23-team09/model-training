@@ -1,0 +1,17 @@
+stages:
+  process:
+    cmd: python ./src/data/make_dataset.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib
+    deps:
+    - ./src/data/make_dataset.py
+    - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+    outs:
+    - ./data/processed/processed_data.joblib
+  train:
+    cmd: | 
+      python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/sentiment_model.joblib
+    deps:
+    - ./src/models/train_model.py
+    - ./data/processed/processed_data.joblib
+    - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+    outs:
+    - ./models/sentiment_model.joblib
