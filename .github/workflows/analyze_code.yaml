@@ -4,7 +4,7 @@ on:
   push:
     branch: '*'
 jobs:
-  build:
+  analyze-code:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
@@ -15,7 +15,7 @@ jobs:
           python-version: '3.8' 
       - name: Run code analysis
         run: |
-          pip install pylint==2.12.2
+          pip install -r requirements.txt
           
           pylint src/data/make_dataset.py
           pylint src/models/predict_model.py
