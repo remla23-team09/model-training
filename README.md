@@ -7,6 +7,9 @@ Project containing the model for restaurant reviews sentiment analysis
 
 # How to run the pipeline
 
+Create virtual environment (Windows):
+- `python -m venv venv`
+
 Activate the virtual environment:
 - `venv\Scripts\activate`
 
