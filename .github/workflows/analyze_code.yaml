@@ -17,3 +17,5 @@ jobs:
         run: |
           pip install -r requirements.txt
           pylint src/data/make_dataset.py src/models/train_model.py src/models/train_twt_roberta_model.py
+      - name: Exit
+        run: echo "Done"
