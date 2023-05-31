@@ -38,6 +38,7 @@ def _preprocess(reviews):
     corpus = []
     for i in range(0, 900):
         corpus.append(_text_process(reviews['Review'][i]))
+    
     preprocessed_data = cv.fit_transform(corpus).toarray()
 
     bow_path = 'output/c1_BoW_Sentiment_Model.pkl'
