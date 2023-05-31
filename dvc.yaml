@@ -17,3 +17,6 @@ stages:
     outs:
     - ./models/twt_roberta_sentiment_model.pkl
     - ./models/sentiment_model.joblib
+    metrics:
+      - metrics.json:
+          cache: false
