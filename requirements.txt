@@ -16,3 +16,4 @@ coverage
 # awscli
 flake8
 python-dotenv
+pylint==2.12.2
