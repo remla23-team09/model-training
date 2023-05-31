@@ -1,0 +1,22 @@
+name: Analyze Code
+run-name: Analyze Code by @${{ github.actor }}
+on:
+  push:
+    branch: '*'
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run code analysis
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+          pylint src/data/make_dataset.py
+          pylint src/models/predict_model.py
+          pylint src/models/train_model.py
+          pylint src/models/train_twt_roberta_model.py
+
+          make lint
