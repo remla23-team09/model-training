@@ -8,12 +8,10 @@ stages:
     - ./data/processed/processed_data.joblib
   train:
     cmd: | 
-      python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_sentiment_model.pkl
       python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/sentiment_model.joblib
     deps:
     - ./src/models/train_model.py
     - ./data/processed/processed_data.joblib
     - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
     outs:
-    - ./models/twt_roberta_sentiment_model.pkl
     - ./models/sentiment_model.joblib
