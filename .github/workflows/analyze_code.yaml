@@ -27,7 +27,7 @@ jobs:
       # - name: Run code analysis
       #   run: mllint run
       - name: echo dvc version
-        run: dvc --version
+        run: dvc version
       - name: dvc commands
         run: |
           dvc remote list 
