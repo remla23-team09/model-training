@@ -8,6 +8,7 @@ matplotlib==3.4.1
 scikit-learn==1.2.2
 transformers
 torch
+pytest
 
 # external requirements
 click

@@ -33,3 +33,6 @@ To see the difference in the accuracy metric:
 
 To see the experiment log:
 - `dvc exp show`
+
+To run tests:
+- `pytest`

@@ -17,3 +17,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run code analysis
         run: mllint run
+      - name: Run tests
+        run: pytest
