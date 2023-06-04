@@ -23,10 +23,10 @@ jobs:
       - name: Fetch dvc files
         run: dvc pull
         env:
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run pipeline
         run: dvc repro
         env:
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run tests
         run: pytest
