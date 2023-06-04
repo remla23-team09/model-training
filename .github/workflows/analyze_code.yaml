@@ -21,7 +21,9 @@ jobs:
         with:
           python-version: '3.8' 
       - name: Install requirements
-        run: pip install dvc
+        run: |
+          pip install dvc
+          pip install dvc_gdrive
       # - name: Run code analysis
       #   run: mllint run
       - name: dvc commands
