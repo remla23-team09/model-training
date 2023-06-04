@@ -8,29 +8,29 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/data/make_dataset.py
-      md5: bcf00ac7fae096bf380ce57744127b21
-      size: 2854
+      md5: 3d6f804e9601babce83b866ba884f99f
+      size: 3404
     outs:
     - path: ./data/processed/processed_data.joblib
-      md5: b9ebf24cdaf8211af925afe954c6ecf4
+      md5: 7adba7f012dfeda1c2beb37d45f0fb20
       size: 10224225
   train:
     cmd: "python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
       ./data/processed/processed_data.joblib ./models/sentiment_model.joblib\n"
     deps:
     - path: ./data/processed/processed_data.joblib
-      md5: b9ebf24cdaf8211af925afe954c6ecf4
+      md5: 7adba7f012dfeda1c2beb37d45f0fb20
       size: 10224225
     - path: ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/models/train_model.py
-      md5: e0cd00031bba0beea07e218c8ed060bd
-      size: 1769
+      md5: 09416e2f474e9bb80ced2bae2e2241ce
+      size: 5083
     outs:
     - path: ./models/sentiment_model.joblib
-      md5: 649615810f57033e7b806a0be21c75e0
+      md5: 1eb83c923e7ada04493980a5125615ec
       size: 46215
     - path: metrics.json
-      md5: b687424ba324800f72bd06751070c065
+      md5: b852ff050f5c1257c7b73261d605a7bd
       size: 32

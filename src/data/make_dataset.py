@@ -40,13 +40,12 @@ def _text_process(data):
     review = ' '.join(review)
     return review
 
-
 def _preprocess(reviews, output_filepath):
 
-    count_vectorizer = CountVectorizer(max_features=1420)
+    count_vectorizer = CountVectorizer(max_features=1420,ngram_range=(1, 2))
 
     corpus = []
-    for i in range(0, 900):
+    for i in range(0, len(reviews)):
         corpus.append(_text_process(reviews['Review'][i]))
 
     preprocessed_data = count_vectorizer.fit_transform(corpus).toarray()

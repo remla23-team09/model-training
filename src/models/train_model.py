@@ -50,6 +50,81 @@ def main(processed_data_filepath, raw_data_filepath, model_output_filepath):
     # Store classifier
     dump(classifier, model_output_filepath)
 
+def train_model(raw_data_filepath, processed_data_filepath, seed):
+    # Get the preprocessed data, and split it into test and training data.
+    raw_data = _load_data(raw_data_filepath)
+
+    X = load(processed_data_filepath)
+    y = raw_data.iloc[:, -1].values
+
+    X_train, X_test, y_train, y_test = train_test_split(
+                                        X,
+                                        y,
+                                        test_size=0.20,
+                                        random_state=seed
+                                        )
+
+    # Train the model
+    classifier = GaussianNB()
+    classifier.fit(X_train, y_train)
+
+    # Classify the test data
+    y_pred = classifier.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    return accuracy
+
+def train_model_loaded_data(classifier, raw_data, processed_data_filepath):
+    # Get the preprocessed data, and split it into test and training data.
+    X = load(processed_data_filepath)
+
+    y = raw_data.iloc[:, -1].values
+
+    X_train, X_test, y_train, y_test = train_test_split(
+                                        X,
+                                        y,
+                                        test_size=0.20,
+                                        random_state=5
+                                        )
+
+    # Train the model
+    #classifier = GaussianNB()
+    #classifier.fit(X_train, y_train)
+
+    # Classify the test data
+    y_pred = classifier.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    return accuracy
+
+def evaluate_model(classifier, processed_data_filepath, raw_data_filepath, seed = 0):
+    # Get the preprocessed data, and split it into test and training data.
+    raw_data = _load_data(processed_data_filepath)
+
+    X = load(raw_data_filepath)
+    y = raw_data.iloc[:, -1].values
+
+    _, X_test, _, y_test = train_test_split(
+                                        X,
+                                        y,
+                                        test_size=0.20,
+                                        random_state=seed
+                                        )
+
+    # Classify the test data
+    y_pred = classifier.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
+    accuracy = accuracy_score(y_test, y_pred)
+    json_object = json.dumps({"accuracy": accuracy})
+    with open("metrics.json", "w") as outfile:
+        outfile.write(json_object)
+
+    return accuracy
 
 if __name__ == "__main__":
     main()
