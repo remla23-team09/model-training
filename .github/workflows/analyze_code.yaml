@@ -17,6 +17,9 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run code analysis
         run: mllint run
+      - name: dvc commands
+        run: |
+          dvc remote list
       - name: Fetch dvc files
         run: dvc pull
       - name: Run pipeline
