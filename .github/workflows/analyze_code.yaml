@@ -13,9 +13,7 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: echo "$GCP_SA_KEY" > ./gcp-sa-key.json
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/gcp-sa-key.json" >> $GITHUB_ENV
-      - name: echo $PWD
-        run: echo $PWD
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=/home/runner/work/model-training/model-training/gcp-sa-key.json" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
