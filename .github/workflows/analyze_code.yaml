@@ -19,5 +19,7 @@ jobs:
         run: mllint run
       - name: Fetch dvc files
         run: dvc pull
+      - name: Run pipeline
+        run: dvc repro
       - name: Run tests
         run: pytest
