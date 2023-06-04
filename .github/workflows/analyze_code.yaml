@@ -7,6 +7,13 @@ jobs:
   analyze-code:
     runs-on: ubuntu-22.04
     steps:
+      - name: Set up GCP credentials
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+        run: echo "$GCP_SA_KEY" > ./gcp-sa-key.json
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/gcp-sa-key.json" >> $GITHUB_ENV
       - name: Checkout code
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -22,11 +29,7 @@ jobs:
           dvc remote list 
       - name: Fetch dvc files
         run: dvc pull
-        env:
-          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run pipeline
         run: dvc repro
-        env:
-          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run tests
         run: pytest
