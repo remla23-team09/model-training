@@ -10,6 +10,7 @@ torch
 pytest
 dvc
 dvc-gdrive
+dvc_s3
 
 # external requirements
 click
