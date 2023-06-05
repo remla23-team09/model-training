@@ -5,16 +5,18 @@ from src.models.train_model import train_model, train_model_loaded_data, evaluat
 from src.data.make_dataset import preprocess_test
 import time
 import psutil
+
+
 @pytest.fixture()
 def trained_model():
     model = joblib.load("./models/sentiment_model.joblib")
     yield model
+
 @pytest.fixture()
 def test_data():
     test_file = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
     data = pd.read_csv(test_file, sep='\t', quoting=3)
     yield data
-
 
 def test_data_invariants(test_data):
     # Perform necessary data checks or comparisons
@@ -24,7 +26,6 @@ def test_data_invariants(test_data):
 
 
 def test_model_staleness(trained_model,test_data):
-
     data_before = preprocess_test(test_data[:450])
     score_before = train_model_loaded_data(trained_model, test_data[:450], data_before)
 
@@ -46,8 +47,6 @@ def test_training_speed(trained_model):
 
     baseline_training_time = 0.05
     assert training_time <= baseline_training_time
-
-
 
 def test_ram_usage(trained_model):
     processed_data_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"

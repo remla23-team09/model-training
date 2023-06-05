@@ -4,6 +4,7 @@ import pandas
 from src.models.train_model import train_model, train_model_loaded_data, evaluate_model
 from src.data.make_dataset import preprocess_test
 
+
 @pytest.fixture()
 def trained_model():
     model = joblib.load("./models/sentiment_model.joblib")
