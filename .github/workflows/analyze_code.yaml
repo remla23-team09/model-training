@@ -7,13 +7,12 @@ jobs:
   analyze-code:
     runs-on: ubuntu-22.04
     steps:
-      - name: Set up GCP credentials
-        env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA }}
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-        run: echo "$GCP_SA_KEY" > ./gcp-sa-key.json
-      - name: Set GOOGLE_APPLICATION_CREDENTIALS
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=/home/runner/work/model-training/model-training/gcp-sa-key.json" >> $GITHUB_ENV
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
       - name: Checkout code
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
