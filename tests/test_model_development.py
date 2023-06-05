@@ -1,7 +1,7 @@
 import joblib
 import pytest
 import pandas
-from src.models.train_model import evaluate_model, train_model_loaded_data
+from src.models.train_model import train_model, train_model_loaded_data, evaluate_model
 from src.data.make_dataset import preprocess_test
 
 @pytest.fixture()
@@ -14,6 +14,14 @@ def test_data():
     test_file = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
     data = pandas.read_csv(test_file, sep='\t', quoting=3)
     yield data
+
+def test_nondeternism_robustness(trained_model):
+    raw_data_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
+    processed_data_filepath = "./data/processed/processed_data.joblib"
+    original_score = evaluate_model(trained_model, raw_data_filepath, processed_data_filepath)
+    for seed in [1,2]:
+        model_variant_accuracy = train_model(raw_data_filepath, processed_data_filepath, seed)
+        assert abs(original_score - model_variant_accuracy) <= 0.2
 
 def data_slice(trained_model, sliced_data):
     processed_data_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
