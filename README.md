@@ -34,5 +34,22 @@ To see the difference in the accuracy metric:
 To see the experiment log:
 - `dvc exp show`
 
+# Tests
+
 To run tests:
 - `pytest`
+
+To get a test report:
+- `pytest --html=report.html`, and open up the html-file in your browser.
+
+To see a coverage report (adequacy metric): 
+- `pytest --cov=. --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
+
+Screenshot of test report:
+![report](docs/report.JPG)
+
+Screenshot of coverage report:
+![coverage](docs/coverage.JPG)
+
+
+

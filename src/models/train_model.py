@@ -36,7 +36,6 @@ def metrics(accuracy):
 @click.argument('model_output_filepath', type=click.Path())
 def main(processed_data_filepath, raw_data_filepath, model_output_filepath):
     """Train and store the model."""
-
     # Get the preprocessed data, and split it into test and training data.
     raw_data = load_data(processed_data_filepath)
     X = load(raw_data_filepath)
@@ -46,7 +45,7 @@ def main(processed_data_filepath, raw_data_filepath, model_output_filepath):
                                         X,
                                         y,
                                         test_size=0.20,
-                                        random_state=5
+                                        random_state=random_seed
                                         )
 
     # Train the model
