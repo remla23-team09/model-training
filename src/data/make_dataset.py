@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-from dotenv import find_dotenv, load_dotenv
 import pandas as pd
 import nltk
 import re
 import click
 import logging
+import pickle
+from dotenv import find_dotenv, load_dotenv
 from pathlib import Path
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from joblib import dump
 from sklearn.feature_extraction.text import CountVectorizer
-import pickle
+
 
 
 ps = PorterStemmer()
@@ -19,8 +20,6 @@ all_stopwords = stopwords.words('english')
 all_stopwords.remove('not')
 
 
-# OLD: data/a1_RestaurantReviews_HistoricDump.tsv
-# NEW: data/raw/a1_RestaurantReviews_HistoricDump.tsv
 def _load_data(input_filepath):
     reviews = pd.read_csv(
         input_filepath,
@@ -40,7 +39,6 @@ def _text_process(data):
     review = ' '.join(review)
     return review
 
-
 def _preprocess(reviews, output_filepath):
 
     count_vectorizer = CountVectorizer(max_features=1420)
@@ -57,8 +55,21 @@ def _preprocess(reviews, output_filepath):
     dump(preprocessed_data, output_filepath)
     return preprocessed_data
 
+def preprocess_test(reviews):
+    """Preprocess the reviews and return it as a count vectorizer."""
+
+    count_vectorizer = CountVectorizer(max_features=1420,ngram_range=(1, 2))
+
+    corpus = []
+    for i in range(0, len(reviews)):
+        corpus.append(_text_process(reviews['Review'][i]))
+
+    return count_vectorizer.fit_transform(corpus).toarray()
+
 
 def prepare(review):
+    """Preprocess the input reviews in the same way as the training data."""
+
     bag_of_words = '../../data/interim/c1_BoW_Sentiment_Model.pkl'
     count_vectorizer = pickle.load(open(bag_of_words, "rb"))
     processed_input = count_vectorizer.transform([review]).toarray()[0]
@@ -84,8 +95,8 @@ def main(input_filepath, output_filepath):
 
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
+    LOG_FMT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    logging.basicConfig(level=logging.INFO, format=LOG_FMT)
 
     # not used in this stub but often useful for finding various files
     project_dir = Path(__file__).resolve().parents[2]
