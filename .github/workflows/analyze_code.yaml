@@ -22,7 +22,7 @@ jobs:
       - name: Install requirements
         run: |
           pip install dvc
-          pip install dvc_gdrive
+          pip install dvc_s3
       # - name: Run code analysis
       #   run: mllint run
       - name: echo dvc version
