@@ -1,4 +1,4 @@
 outs:
-- md5: fbe9dd5374ff5147db53a6c8eca8e5c0
-  size: 34146
+- md5: 17a80cbc847d6b61f6822739f4b05144
+  size: 39823
   path: c1_BoW_Sentiment_Model.pkl
