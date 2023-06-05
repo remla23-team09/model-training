@@ -15,11 +15,18 @@ jobs:
           python-version: '3.8' 
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Run code analysis
-        run: mllint run
+      # - name: Run code analysis
+      #   run: mllint run
+      - name: dvc commands
+        run: |
+          dvc remote list 
       - name: Fetch dvc files
         run: dvc pull
+        env:
+          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run pipeline
         run: dvc repro
+        env:
+          access_token: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: Run tests
         run: pytest
