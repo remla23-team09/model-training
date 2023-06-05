@@ -34,7 +34,8 @@ def metrics(accuracy):
 @click.argument('processed_data_filepath', type=click.Path(exists=True))
 @click.argument('raw_data_filepath', type=click.Path(exists=True))
 @click.argument('model_output_filepath', type=click.Path())
-def main(processed_data_filepath, raw_data_filepath, model_output_filepath):
+@click.argument('random_seed', type=click.Path())
+def main(processed_data_filepath, raw_data_filepath, model_output_filepath, random_seed):
     """Train and store the model."""
     # Get the preprocessed data, and split it into test and training data.
     raw_data = load_data(processed_data_filepath)
