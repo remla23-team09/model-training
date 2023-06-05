@@ -11,6 +11,8 @@ pytest
 dvc
 dvc-gdrive
 dvc_s3
+pytest-cov
+pytest-html
 
 # external requirements
 click
