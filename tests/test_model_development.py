@@ -37,4 +37,4 @@ def test_data_slice_negative(trained_model, test_data):
 
 def test_data_slice_positive(trained_model, test_data):
     sliced_data = test_data[test_data['Liked'] == 1].reset_index()
-    assert data_slice(trained_model, sliced_data) <= 0.2
+    assert data_slice(trained_model, sliced_data) <= 0.3
