@@ -20,7 +20,7 @@ Set up DVC:
 - `pip install dvc`
 
 Pull the files from the DVC remote:
-- `dvc pull` (if you get errors, try to `dvc fetch` the files you could not pull, and pull again)
+- `dvc pull`
 
 Run the pipeline:
 - `dvc repro`
@@ -40,7 +40,7 @@ To run tests:
 - `pytest`
 
 To get a test report:
-- `pytest --html=report.html`, and open up the html-file in your browser.
+- `pytest --html=report.html`, and open up report.html in your browser.
 
 To see a coverage report (adequacy metric): 
 - `pytest --cov=. --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
