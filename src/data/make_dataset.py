@@ -94,6 +94,21 @@ def main(input_filepath, output_filepath):
     _preprocess(reviews, output_filepath)
 
 
+def main(input_filepath, output_filepath):
+    """ Runs data processing scripts to turn raw data from (../raw) into
+        cleaned data ready to be analyzed (saved in ../processed).
+    """
+    logger = logging.getLogger(__name__)
+    logger.info('making final data set from raw data')
+
+    reviews = _load_data(input_filepath)
+
+    with pd.option_context('expand_frame_repr', False):
+        print(reviews)
+
+    _preprocess(reviews, output_filepath)
+
+
 if __name__ == '__main__':
     LOG_FMT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=LOG_FMT)

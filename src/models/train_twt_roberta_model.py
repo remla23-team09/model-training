@@ -19,5 +19,15 @@ def main(model_output_filepath):
     pickle.dump(classifier, open(model_output_filepath, 'wb'))
 
 
+def train_and_store_twt_roberta_model(model_output_filepath):
+    # Get the preprocessed data, and split it into test and training data.
+    classifier = AutoModelForSequenceClassification.from_pretrained(
+        "cardiffnlp/twitter-roberta-base-sentiment"
+        )
+
+    # Store classifier
+    pickle.dump(classifier, open(model_output_filepath, 'wb'))
+
+
 if __name__ == "__main__":
     main()

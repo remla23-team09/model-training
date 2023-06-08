@@ -13,6 +13,10 @@ dvc-gdrive
 dvc_s3
 pytest-cov
 pytest-html
+flask
+flasgger
+joblib
+prometheus_client
 
 # external requirements
 click

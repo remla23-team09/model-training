@@ -80,6 +80,33 @@ def train_model(raw_data_filepath, processed_data_filepath, seed):
 
     return classify(classifier, X_test, y_test)
 
+def train_and_store_model(raw_data_filepath, processed_data_filepath, model_output_filepath, random_seed):
+    """Train and store the model."""
+    # Get the preprocessed data, and split it into test and training data.
+    raw_data = load_data(raw_data_filepath)
+    X = load(processed_data_filepath)
+    y = raw_data.iloc[:, -1].values
+
+    X_train, X_test, y_train, y_test = train_test_split(
+                                        X,
+                                        y,
+                                        test_size=0.20,
+                                        random_state=random_seed
+                                        )
+
+    # Train the model
+    classifier = GaussianNB()
+    classifier.fit(X_train, y_train)
+
+    # Classify the test data and output metrics
+    accuracy = classify(classifier, X_test, y_test)
+    metrics(accuracy)
+
+    # Store classifier
+    dump(classifier, model_output_filepath)
+    
+    return classify(classifier, X_test, y_test)
+
 def train_model_loaded_data(classifier, raw_data, processed_data):
     "Same as train_model() but data is sent in as arguments, instead of file paths. Used in tests."
 

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-training-v1
+  labels: {app: model-training, version: v1}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: model-training, version: v1}
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+      labels: {app: model-training, version: v1}
+    spec:
+      containers:
+      - name: model-training-v1
+        image: ghcr.io/remla23-team09/model-training:{{ .Values.model_service_v1.MODEL_VERSION }}
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: 0.25
+            memory: 256Mi
+          limits:
+            cpu: 2
+            memory: 2Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-training-v2
+  labels: {app: model-training, version: v2}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: model-training, version: v2}
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+      labels: {app: model-training, version: v2}
+    spec:
+      containers:
+      - name: model-training-v2
+        image: ghcr.io/remla23-team09/model-training:{{ .Values.model_service_v2.MODEL_VERSION }}
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: 0.25
+            memory: 256Mi
+          limits:
+            cpu: 2
+            memory: 2Gi

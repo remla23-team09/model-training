@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-training-v1-service
+  labels:
+    app: model-training 
+    version: v1
+    service: model-training
+spec:
+  selector:
+    app: model-training
+    version: v1
+  ports:
+  - port: 8080
+    name: tcp-modelservice
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-training-v2-service
+  labels:
+    app: model-training 
+    version: v2
+    service: model-training
+spec:
+  selector:
+    app: model-training
+    version: v2
+  ports:
+  - port: 8080
+    name: tcp-modelservice
