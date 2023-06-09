@@ -1,0 +1,8 @@
+apiVersion: v2
+name: model-training-chart
+description: A Helm chart for model training api
+
+type: application
+appVersion: "0.0.1"
+
+version: 0.0.1
