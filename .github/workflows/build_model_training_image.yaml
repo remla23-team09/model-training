@@ -29,6 +29,14 @@ jobs:
         uses: ASzc/change-string-case-action@v5
         with:
           string: ${{ github.repository }}
+      - name: Setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Fetch dvc files
+        run: dvc pull
       - name: Build and Push Docker Image
         run: |
           IMG=ghcr.io/${{steps.make_repository_name_lowercase.outputs.lowercase}}
