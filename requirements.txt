@@ -10,7 +10,7 @@ torch
 pytest
 dvc
 dvc-gdrive
-dvc_s3
+dvc-s3
 pytest-cov
 pytest-html
 flask
