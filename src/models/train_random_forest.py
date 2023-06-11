@@ -1,19 +1,21 @@
-import json
+import nltk
 import os
 import sys
+nltk.download("stopwords")
+from sklearn.ensemble import RandomForestClassifier
+import json
 import click
 import pandas as pd
 from joblib import dump, load
 from sklearn.model_selection import train_test_split
-from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, accuracy_score
 
-pd.set_option("display.max_colwidth", None)
-
 sys.path.append(os.getcwd() + "/src/")
-print(os.getcwd() + "/src/")
 
+print(os.getcwd() + "/src/")
 from data.make_dataset import _load_data
+
+pd.set_option("display.max_colwidth", None)
 
 
 def classify(classifier, X_test, y_test):
@@ -27,7 +29,7 @@ def classify(classifier, X_test, y_test):
 def metrics(accuracy):
     """Print the accuracy metric in the json file."""
     json_object = json.dumps({"accuracy": accuracy})
-    with open("naive-bayes.json", "w") as outfile:
+    with open("random-forest.json", "w") as outfile:
         outfile.write(json_object)
 
 
@@ -41,7 +43,9 @@ def main(
 ):
     """Train and store the model."""
     # Get the preprocessed data, and split it into test and training data.
+    print(processed_data_filepath)
     raw_data = _load_data(processed_data_filepath)
+    print(raw_data)
     X = load(raw_data_filepath)
     y = raw_data.iloc[:, -1].values
 
@@ -50,7 +54,7 @@ def main(
     )
 
     # Train the model
-    classifier = GaussianNB()
+    classifier = RandomForestClassifier(n_estimators=1000, random_state=random_seed)
     classifier.fit(X_train, y_train)
 
     # Classify the test data and output metrics
@@ -73,7 +77,7 @@ def train_model(raw_data_filepath, processed_data_filepath, seed):
         X, y, test_size=0.20, random_state=seed
     )
 
-    classifier = GaussianNB()
+    classifier = RandomForestClassifier(n_estimators=1000, random_state=seed)
     classifier.fit(X_train, y_train)
 
     return classify(classifier, X_test, y_test)
@@ -93,7 +97,7 @@ def train_and_store_model(
     )
 
     # Train the model
-    classifier = GaussianNB()
+    classifier = RandomForestClassifier(n_estimators=1000, random_state=random_seed)
     classifier.fit(X_train, y_train)
 
     # Classify the test data and output metrics

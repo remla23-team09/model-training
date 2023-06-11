@@ -6,18 +6,37 @@ stages:
     - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
     outs:
     - ./data/processed/processed_data.joblib
-  train:
+  train-nb:
     cmd: | 
       python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 5
-      python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_model.pkl
     deps:
     - ./src/models/train_model.py
-    - ./src/models/train_twt_roberta_model.py
     - ./data/processed/processed_data.joblib
     - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
     outs:
     - ./models/sentiment_model.joblib
+    metrics:
+      - naive-bayes.json:
+          cache: false
+  train-random-forest:
+    cmd: | 
+      python ./src/models/train_random_forest.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/random_forest_model.joblib 13
+    deps:
+    - ./src/models/train_random_forest.py
+    - ./data/processed/processed_data.joblib
+    - ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
+    outs:
+    - ./models/random_forest_model.joblib
+    metrics:
+      - random-forest.json:
+          cache: false
+  train-roberta:
+    cmd: | 
+      python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_model.pkl
+    deps:
+    - ./src/models/train_twt_roberta_model.py
+    outs:
     - ./models/twt_roberta_model.pkl
     metrics:
-      - metrics.json:
+      - roberta.json:
           cache: false
