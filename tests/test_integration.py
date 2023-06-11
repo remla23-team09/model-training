@@ -2,9 +2,8 @@ import numpy as np
 import pytest
 import pandas as pd
 import joblib
-from src.data.make_dataset import preprocess_test,_text_process
-from src.models.train_model import train_model, evaluate_model,load_data
-from sklearn.feature_extraction.text import CountVectorizer
+from src.data.make_dataset import preprocess_test,_text_process, _load_data
+from src.models.train_model import train_model, evaluate_model
 
 
 @pytest.fixture()
@@ -25,7 +24,7 @@ def mock_data():
 
 def test_get_data():
     input_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
-    data = load_data(input_filepath)
+    data = _load_data(input_filepath)
     assert isinstance(data, pd.DataFrame)
 
 def test_text_process(mock_data):
