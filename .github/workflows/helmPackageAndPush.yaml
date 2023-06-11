@@ -10,7 +10,7 @@ on:
 jobs:
   job_1:
     name: Build & Push
-    runs-on: self-hosted
+    runs-on: remla23-team09-linux-build-agent
     steps:
       - uses: actions/checkout@v3
       - name: Registry Login (ghcr.io)
