@@ -1,11 +1,12 @@
 import os
+import pickle
 import sys
 import time
+
 import joblib
-import pickle
-from git import Repo
 from flasgger import Swagger
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, render_template, request
+from git import Repo
 from prometheus_client import Counter, Gauge, Histogram, Summary, make_wsgi_app
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
@@ -17,34 +18,34 @@ from models.train_twt_roberta_model import train_and_store_twt_roberta_model
 app = Flask(__name__)
 swagger = Swagger(app)
 
-app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
-    '/metrics': make_wsgi_app()
-})
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
 
 
-PATH_OF_GIT_REPO = '../../.git'
+PATH_OF_GIT_REPO = "../../.git"
+
 
 def dvc_push():
-    os.system('dvc push')
+    os.system("dvc push")
+
 
 def git_push(commit_message):
     try:
         repo = Repo(PATH_OF_GIT_REPO)
         repo.git.add(update=True)
         repo.index.commit(commit_message)
-        origin = repo.remote(name='origin')
+        origin = repo.remote(name="origin")
         origin.push()
     except:
-        print('Some error occured while pushing the code')
+        print("Some error occured while pushing the code")
 
 
 def prepare(text):
-    cv = pickle.load(open('c1_BoW_Sentiment_Model.pkl', "rb"))
+    cv = pickle.load(open("c1_BoW_Sentiment_Model.pkl", "rb"))
     processed_input = cv.transform([text]).toarray()[0]
     return [processed_input]
 
 
-@app.route('/train-nb', methods=['POST'])
+@app.route("/train-nb", methods=["POST"])
 def train_nb():
     """
     Naive Bayes Model Training Configuration
@@ -69,15 +70,15 @@ def train_nb():
     """
 
     test_accuracy = train_and_store_model(
-        '../../data/raw/a1_RestaurantReviews_HistoricDump.tsv',
-        '../../data/processed/processed_data.joblib',
-        '../../models/sentiment_model.joblib',
-        request.get_json().get('random_seed'),
+        "../../data/raw/a1_RestaurantReviews_HistoricDump.tsv",
+        "../../data/processed/processed_data.joblib",
+        "../../models/sentiment_model.joblib",
+        request.get_json().get("random_seed"),
     )
 
     dvc_push()
-    git_push('NB Model Training')
-    
+    git_push("NB Model Training")
+
     res = {
         "test_accuracy": str(test_accuracy),
     }
@@ -85,7 +86,7 @@ def train_nb():
     return jsonify(res)
 
 
-@app.route('/train-twt-roberta', methods=['POST'])
+@app.route("/train-twt-roberta", methods=["POST"])
 def train_twt_roberta():
     """
     Twitter Roberta
@@ -109,11 +110,11 @@ def train_twt_roberta():
         description: "Model Downloaded & Processed."
     """
 
-    train_and_store_twt_roberta_model('../../models/twt_roberta_model.pkl')
+    train_and_store_twt_roberta_model("../../models/twt_roberta_model.pkl")
 
     dvc_push()
-    git_push('Twitter Roberta Model Training')
-    
+    git_push("Twitter Roberta Model Training")
+
     res = {
         "parameter_name": "parameter_value",
     }
@@ -123,8 +124,8 @@ def train_twt_roberta():
 
 @app.route("/")
 def home():
-    return render_template('index.html') 
+    return render_template("index.html")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

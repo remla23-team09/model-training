@@ -1,9 +1,9 @@
-import pickle
-import click
 import json
+import pickle
+
+import click
 import pandas as pd
 from transformers import AutoModelForSequenceClassification
-
 
 pd.set_option("display.max_colwidth", None)
 

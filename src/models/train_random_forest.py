@@ -1,19 +1,24 @@
-import nltk
+"""Training the random forest ML model."""
+
+import json
 import os
 import sys
-nltk.download("stopwords")
-from sklearn.ensemble import RandomForestClassifier
-import json
+
 import click
+import nltk
 import pandas as pd
 from joblib import dump, load
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, accuracy_score
+
+from data.make_dataset import _load_data
+
+nltk.download("stopwords")
 
 sys.path.append(os.getcwd() + "/src/")
 
 print(os.getcwd() + "/src/")
-from data.make_dataset import _load_data
 
 pd.set_option("display.max_colwidth", None)
 
