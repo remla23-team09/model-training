@@ -8,8 +8,9 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/data/make_dataset.py
-      md5: 7377da229ff53f2e5e6e55584855e7c3
-      size: 3680
+      hash: md5
+      md5: ceb18a01a70e10e159b2c9e485898003
+      size: 3699
     outs:
     - path: ./data/processed/processed_data.joblib
       md5: b9ebf24cdaf8211af925afe954c6ecf4
@@ -69,8 +70,9 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/models/train_model.py
-      md5: 790cfad2d505c98ff761206ca6fad7e2
-      size: 4079
+      hash: md5
+      md5: dcf29faa6467275def5c9e3c110d299e
+      size: 4120
     outs:
     - path: ./models/sentiment_model.joblib
       md5: 649615810f57033e7b806a0be21c75e0
@@ -82,12 +84,14 @@ stages:
     cmd: "python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_model.pkl\n"
     deps:
     - path: ./src/models/train_twt_roberta_model.py
-      md5: a9879a9dc1fb525a4b1b786888a77065
-      size: 1191
+      hash: md5
+      md5: 14b12dd0c06c3530d9e4844acd92c43a
+      size: 1206
     outs:
     - path: ./models/twt_roberta_model.pkl
-      md5: d06af904bc11dbe3d306417d4d1653c2
-      size: 498697062
+      hash: md5
+      md5: 76086d36bac9e089e7c439b27c421a20
+      size: 498697099
     - path: roberta.json
       md5: 7ed9cf763e903cf16cf4017ae74d21f7
       size: 28
@@ -102,8 +106,9 @@ stages:
       md5: f301a6d162636b3c5e31b168ac0052aa
       size: 55585
     - path: ./src/models/train_random_forest.py
-      md5: 8463dc6dc8c45aa9c192c68995cff4b5
-      size: 4346
+      hash: md5
+      md5: e709811c48283b556ef3e6a3a0b8f131
+      size: 4396
     outs:
     - path: ./models/random_forest_model.joblib
       md5: 37867d65ec21139fb0e7eddb2ebc6836

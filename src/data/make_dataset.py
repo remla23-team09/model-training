@@ -20,7 +20,7 @@ all_stopwords.remove("not")
 
 
 def _load_data(input_filepath):
-    with open(input_filepath, 'r') as file:
+    with open(input_filepath, "r") as file:
         reviews = pd.read_csv(file, sep="\t", quoting=3)
     return reviews
 

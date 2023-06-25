@@ -27,6 +27,7 @@ python-dotenv = "^1.0.0"
 pandas = "1.2.4"
 
 [tool.poetry.dev-dependencies]
+pylint = "^2.12.2"
 bandit = "^1.7.5"
 black = "^23.3.0"
 coverage = "^7.2.7"

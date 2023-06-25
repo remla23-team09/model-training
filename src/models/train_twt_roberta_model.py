@@ -1,6 +1,5 @@
 import json
 import pickle
-
 import click
 import pandas as pd
 from transformers import AutoModelForSequenceClassification
@@ -12,6 +11,7 @@ def metrics():
     with open("roberta.json", "w") as outfile:
         json_object = json.dumps({"result": "Model Packaged"})
         outfile.write(json_object)
+    return None
 
 
 @click.command()

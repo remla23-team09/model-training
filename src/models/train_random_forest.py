@@ -12,8 +12,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
 
-from data.make_dataset import _load_data
-
 nltk.download("stopwords")
 
 sys.path.append(os.getcwd() + "/src/")
@@ -22,6 +20,7 @@ print(os.getcwd() + "/src/")
 
 pd.set_option("display.max_colwidth", None)
 
+from data.make_dataset import _load_data
 
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
