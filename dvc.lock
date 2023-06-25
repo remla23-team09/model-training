@@ -5,8 +5,8 @@ stages:
       ./data/processed/processed_data.joblib
     deps:
     - path: ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      md5: f301a6d162636b3c5e31b168ac0052aa
-      size: 55585
+      md5: 102f1f4193e0bdebdd6cce7f13e0a839
+      size: 54686
     - path: ./src/data/make_dataset.py
       md5: 7377da229ff53f2e5e6e55584855e7c3
       size: 3680
@@ -60,23 +60,23 @@ stages:
       size: 46215
   train-nb:
     cmd: "python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 15\n"
+      ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 16\n"
     deps:
     - path: ./data/processed/processed_data.joblib
       md5: b9ebf24cdaf8211af925afe954c6ecf4
       size: 10224225
     - path: ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      md5: f301a6d162636b3c5e31b168ac0052aa
-      size: 55585
+      md5: 102f1f4193e0bdebdd6cce7f13e0a839
+      size: 54686
     - path: ./src/models/train_model.py
       md5: 790cfad2d505c98ff761206ca6fad7e2
       size: 4079
     outs:
     - path: ./models/sentiment_model.joblib
-      md5: d3fc58888a98f59e584795c60d1870d1
+      md5: 6efd7286b712ef99d31bb1d1063b7379
       size: 46215
     - path: naive-bayes.json
-      md5: ea9ed6a793a90562bbb2ca9661e026f8
+      md5: 51554a965facf46b22081f30d7b88c05
       size: 32
   train-roberta:
     cmd: "python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_model.pkl\n"
@@ -86,7 +86,7 @@ stages:
       size: 1191
     outs:
     - path: ./models/twt_roberta_model.pkl
-      md5: d06af904bc11dbe3d306417d4d1653c2
+      md5: 85a83ec5c8080674637e72290d814d08
       size: 498697062
     - path: roberta.json
       md5: 7ed9cf763e903cf16cf4017ae74d21f7
@@ -99,8 +99,8 @@ stages:
       md5: b9ebf24cdaf8211af925afe954c6ecf4
       size: 10224225
     - path: ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      md5: f301a6d162636b3c5e31b168ac0052aa
-      size: 55585
+      md5: 102f1f4193e0bdebdd6cce7f13e0a839
+      size: 54686
     - path: ./src/models/train_random_forest.py
       md5: 8463dc6dc8c45aa9c192c68995cff4b5
       size: 4346

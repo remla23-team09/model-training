@@ -27,6 +27,7 @@ gitpython
 flake8
 python-dotenv
 mllint
+dslinter
 pylint==2.12.2
 mypy
 black

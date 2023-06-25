@@ -8,7 +8,7 @@ stages:
     - ./data/processed/processed_data.joblib
   train-nb:
     cmd: | 
-      python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 15
+      python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 16
     deps:
     - ./src/models/train_model.py
     - ./data/processed/processed_data.joblib
