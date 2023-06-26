@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "model_training"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 numpy = "1.20.2"
 nltk = "3.6.1"
 matplotlib = "3.4.1"
@@ -32,13 +32,13 @@ bandit = "^1.7.5"
 black = "^23.3.0"
 coverage = "^7.2.7"
 dvc = "^3.2.1"
-flake8 = "^6.0.0"
 isort = "^5.12.0"
 mllint = "^0.12.2"
-mypy = "^1.4.0"
+mypy = "^0.931"
 pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
 sphinx = "^7.0.1"
+dslinter = "^2.0.9" 
 
 [testing.coverage.report]
 report = "tests-report.xml"
