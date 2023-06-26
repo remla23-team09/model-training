@@ -5,7 +5,7 @@ on:
     branch: '*'
 jobs:
   analyze-code:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Setup AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -23,16 +23,20 @@ jobs:
       #   run: mllint run
       - name: Run pylint
         run: |
-            pylint --exit-zero --load-plugins=dslinter --output-format=parseable  .
-      - name: echo dvc version
-
-        run: dvc version
-      - name: dvc commands
-        run: |
-          dvc remote list 
+          pylint --load-plugins=dslinter src tests > output.txt
+      - name: Save pytest results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pylint-results
+          path: ./pylint_results/**
       - name: Fetch dvc files
         run: dvc pull
       - name: Run pipeline
         run: dvc repro
       - name: Run tests
-        run: pytest
+        run: pytest --junit-xml=./pytest_results/report.xml >> ./pytest_results/output.txt
+      - name: Save pytest results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: ./pytest_results/**
