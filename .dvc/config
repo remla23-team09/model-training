@@ -1,5 +1,5 @@
 [core]
-    remote = s3bucket-private
+    remote = s3remote
     autostage = true
 ['remote "s3remote"']
     url = https://remla23-team09-s3bucket.s3.eu-central-1.amazonaws.com/restaurants/
