@@ -16,9 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
-        name: Set Python Version to 3.8
+        name: Set Python Version to 3.9
         with:
-          python-version: '3.8'
+          python-version: '3.9'
       - name: Install poetry
         run: curl -sSL https://install.python-poetry.org | python3 - --version=1.5.0
       - name: Install dependencies
