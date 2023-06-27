@@ -26,10 +26,10 @@ jobs:
           poetry install
           poetry check
       - name: Run code analysis
-        run: poetry run mllint run
+        run: poetry run mllint --output ./mllint_report.md
       - name: Run pylint
         run: |
-          poetry run pylint --load-plugins=dslinter src tests > output.txt
+          poetry run pylint --load-plugins=dslinter tests src
       - name: Save pytest results
         uses: actions/upload-artifact@v3
         with:
@@ -40,9 +40,19 @@ jobs:
       - name: Run pipeline
         run: poetry run dvc repro
       - name: Run tests
-        run: poetry run pytest --junit-xml=./pytest_results/report.xml >> ./pytest_results/output.txt
+        run: poetry run pytest --junit-xml=./pytest_report.xml --cov=./tests/ --cov-report=xml:./coverage_report.xml
       - name: Save pytest results
         uses: actions/upload-artifact@v3
         with:
           name: pytest-results
-          path: ./pytest_results/**
+          path: ./pytest_report.xml
+      - name: Save coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: ./coverage_report.xml
+      - name: Save mllint results
+        uses: actions/upload-artifact@v3
+        with:
+          name: mllint-results
+          path: ./mllint_report.md
