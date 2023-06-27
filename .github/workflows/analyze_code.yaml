@@ -19,7 +19,6 @@ jobs:
         name: Set Python Version to 3.8
         with:
           python-version: '3.8'
-          cache: 'poetry'
       - name: Install dependencies
         run: poetry install
       - name: Run code analysis
