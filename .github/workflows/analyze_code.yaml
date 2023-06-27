@@ -49,7 +49,7 @@ jobs:
       - name: Save coverage
         uses: actions/upload-artifact@v3
         with:
-          name: pytest-results
+          name: coverage-results
           path: ./coverage_report.xml
       - name: Save mllint results
         uses: actions/upload-artifact@v3
