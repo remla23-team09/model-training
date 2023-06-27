@@ -61,7 +61,7 @@ stages:
       size: 46215
   train-nb:
     cmd: "python ./src/models/train_model.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 5\n"
+      ./data/processed/processed_data.joblib ./models/sentiment_model.joblib 16\n"
     deps:
     - path: ./data/processed/processed_data.joblib
       md5: b9ebf24cdaf8211af925afe954c6ecf4
@@ -75,10 +75,10 @@ stages:
       size: 4139
     outs:
     - path: ./models/sentiment_model.joblib
-      md5: 649615810f57033e7b806a0be21c75e0
+      md5: 6efd7286b712ef99d31bb1d1063b7379
       size: 46215
     - path: naive-bayes.json
-      md5: b687424ba324800f72bd06751070c065
+      md5: 51554a965facf46b22081f30d7b88c05
       size: 32
   train-roberta:
     cmd: "python ./src/models/train_twt_roberta_model.py ./models/twt_roberta_model.pkl\n"
@@ -97,7 +97,7 @@ stages:
       size: 28
   train-random-forest:
     cmd: "python ./src/models/train_random_forest.py ./data/raw/a1_RestaurantReviews_HistoricDump.tsv
-      ./data/processed/processed_data.joblib ./models/random_forest_model.joblib 13\n"
+      ./data/processed/processed_data.joblib ./models/random_forest_model.joblib 12\n"
     deps:
     - path: ./data/processed/processed_data.joblib
       md5: b9ebf24cdaf8211af925afe954c6ecf4
@@ -111,8 +111,8 @@ stages:
       size: 4414
     outs:
     - path: ./models/random_forest_model.joblib
-      md5: 37867d65ec21139fb0e7eddb2ebc6836
-      size: 36692697
+      md5: 7bb37be97d51b0620f7ac674df219417
+      size: 36557913
     - path: random-forest.json
-      md5: cd9d060d844cc65afb74b11e8e2612e9
+      md5: a54c46bf2a0e2ad159eba57f1c33f5fb
       size: 32

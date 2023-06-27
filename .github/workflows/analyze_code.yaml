@@ -5,7 +5,7 @@ on:
     branch: '*'
 jobs:
   analyze-code:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Setup AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -18,17 +18,29 @@ jobs:
       - uses: actions/setup-python@v4
         name: Set Python Version to 3.8
         with:
-          python-version: '3.8' 
-      # - name: Run code analysis
-      #   run: mllint run
-      - name: echo dvc version
-        run: dvc version
-      - name: dvc commands
+          python-version: '3.8'
+      - name: Install dependencies
         run: |
-          dvc remote list 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run code analysis
+        run: mllint run
+      - name: Run pylint
+        run: |
+          pylint --load-plugins=dslinter src tests > output.txt
+      - name: Save pytest results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pylint-results
+          path: ./pylint_results/**
       - name: Fetch dvc files
         run: dvc pull
       - name: Run pipeline
         run: dvc repro
       - name: Run tests
-        run: pytest
+        run: pytest --junit-xml=./pytest_results/report.xml >> ./pytest_results/output.txt
+      - name: Save pytest results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results
+          path: ./pytest_results/**
