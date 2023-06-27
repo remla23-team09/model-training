@@ -1,3 +1,5 @@
+"""Training the TWT Roberta model."""
+
 import json
 import pickle
 import click
@@ -6,8 +8,8 @@ from transformers import AutoModelForSequenceClassification
 
 pd.set_option("display.max_colwidth", None)
 
-
 def metrics():
+    """Print the result metric in the json file."""
     with open("roberta.json", "w") as outfile:
         json_object = json.dumps({"result": "Model Packaged"})
         outfile.write(json_object)

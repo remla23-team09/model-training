@@ -25,15 +25,15 @@ from data.make_dataset import _load_data
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
     y_pred = classifier.predict(X_test)
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
+    CM = confusion_matrix(y_test, y_pred)
+    print(CM)
     return accuracy_score(y_test, y_pred)
 
 
 def metrics(accuracy):
     """Print the accuracy metric in the json file."""
     json_object = json.dumps({"accuracy": accuracy})
-    with open("random-forest.json", "w") as outfile:
+    with open("random-forest.json", "w", encoding="utf-8") as outfile:
         outfile.write(json_object)
 
 
