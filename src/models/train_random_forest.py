@@ -1,35 +1,39 @@
-import nltk
+"""Training the random forest ML model."""
+
+import json
 import os
 import sys
-nltk.download("stopwords")
-from sklearn.ensemble import RandomForestClassifier
-import json
+
 import click
+import nltk
 import pandas as pd
 from joblib import dump, load
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, accuracy_score
+
+nltk.download("stopwords")
 
 sys.path.append(os.getcwd() + "/src/")
 
 print(os.getcwd() + "/src/")
-from data.make_dataset import _load_data
 
 pd.set_option("display.max_colwidth", None)
 
+from data.make_dataset import _load_data
 
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
     y_pred = classifier.predict(X_test)
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
+    CM = confusion_matrix(y_test, y_pred)
+    print(CM)
     return accuracy_score(y_test, y_pred)
 
 
 def metrics(accuracy):
     """Print the accuracy metric in the json file."""
     json_object = json.dumps({"accuracy": accuracy})
-    with open("random-forest.json", "w") as outfile:
+    with open("random-forest.json", "w", encoding="utf-8") as outfile:
         outfile.write(json_object)
 
 

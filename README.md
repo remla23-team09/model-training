@@ -7,43 +7,36 @@ Project containing the model for restaurant reviews sentiment analysis
 
 # How to run the pipeline
 
-Create virtual environment (Windows):
-- `python -m venv venv`
+TODO: add how to install poetry, or what poetry version is required
 
-Activate the virtual environment:
-- `venv\Scripts\activate`
-
-Install requirements:
-- `pip install -r requirements.txt`
-
-Set up DVC:
-- `pip install dvc`
+Install dependencies:
+- `poetry install`
 
 Pull the files from the DVC remote:
-- `dvc pull`
+- `poetry run dvc pull`
 
 Run the pipeline:
-- `dvc repro`
+- `poetry run dvc repro`
 
 To run the experiment:
-- `dvc exp run`
+- `poetry run dvc exp run`
 
 To see the difference in the accuracy metric:
-- `dvc metrics diff`
+- `poetry run dvc metrics diff`
 
 To see the experiment log:
-- `dvc exp show`
+- `poetry run dvc exp show`
 
 # Tests
 
 To run tests:
-- `pytest`
+- `poetry run pytest`
 
 To get a test report:
-- `pytest --html=report.html`, and open up report.html in your browser.
+- `poetry run pytest --html=report.html`, and open up report.html in your browser.
 
 To see a coverage report (adequacy metric): 
-- `pytest --cov=. --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
+- `poetry run pytest --cov=. --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
 
 Screenshot of test report:
 ![report](docs/report.JPG)

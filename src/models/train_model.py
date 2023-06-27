@@ -1,12 +1,15 @@
+"""Training the Gaussian NB model."""
+
 import json
 import os
 import sys
+
 import click
 import pandas as pd
 from joblib import dump, load
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import confusion_matrix, accuracy_score
 
 pd.set_option("display.max_colwidth", None)
 
@@ -15,20 +18,19 @@ print(os.getcwd() + "/src/")
 
 from data.make_dataset import _load_data
 
-
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
     y_pred = classifier.predict(X_test)
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
+    CM = confusion_matrix(y_test, y_pred)
+    print(CM)
     return accuracy_score(y_test, y_pred)
 
 
 def metrics(accuracy):
     """Print the accuracy metric in the json file."""
     json_object = json.dumps({"accuracy": accuracy})
-    with open("naive-bayes.json", "w") as outfile:
-        outfile.write(json_object)
+    with open("naive-bayes.json", "w", encoding="utf-8") as outfile:
+         outfile.write(json_object)
 
 
 @click.command()

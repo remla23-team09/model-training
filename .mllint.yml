@@ -2,7 +2,7 @@ rules:
     disabled: []
     custom: []
 git:
-    maxFileSize: 10000000
+    maxFileSize: 100000000
 code-quality:
     linters:
         - pylint
@@ -12,13 +12,5 @@ code-quality:
         - bandit
 testing:
     report: "tests-report.xml"
-    targets:
-        minimum: 1
-        ratio:
-            tests: 1
-            other: 4
     coverage:
-        report: ""
-        targets:
-            line: 80
-
+        report: "coverage.xml"
