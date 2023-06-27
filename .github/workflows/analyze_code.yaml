@@ -40,7 +40,7 @@ jobs:
       - name: Run pipeline
         run: poetry run dvc repro
       - name: Run tests
-        run: poetry run pytest --junit-xml=./pytest_report.xml --cov=./tests/ --cov-report=xml:./coverage_report.xml
+        run: poetry run pytest --junit-xml=./pytest_report.xml --cov=./src/ --cov-report=xml:./coverage_report.xml
       - name: Save pytest results
         uses: actions/upload-artifact@v3
         with:
