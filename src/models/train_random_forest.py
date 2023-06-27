@@ -22,11 +22,12 @@ pd.set_option("display.max_colwidth", None)
 
 from data.make_dataset import _load_data
 
+
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
     y_pred = classifier.predict(X_test)
-    CM = confusion_matrix(y_test, y_pred)
-    print(CM)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
     return accuracy_score(y_test, y_pred)
 
 

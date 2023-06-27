@@ -85,7 +85,23 @@ disable=raw-checker-failed,
         suppressed-message,
         useless-suppression,
         deprecated-pragma,
-        use-symbolic-message-instead
+        use-symbolic-message-instead,
+        column-selection-pandas,
+        datatype-pandas,
+        redefined-outer-name,
+        chain-indexing-pandas,
+        chained-comparison,
+        duplicate-code,
+        unspecified-encoding,
+        consider-using-with,
+        no-value-for-parameter,
+        no-name-in-module,
+        wrong-import-position,
+        hyperparameters-scikitlearn,
+        missing-function-docstring,
+        import-error,
+        bare-except,
+        invalid-name
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option

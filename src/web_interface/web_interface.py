@@ -1,13 +1,13 @@
+"""ADD DESCRIPTION"""
+
 import os
 import pickle
 import sys
-import time
 
-import joblib
 from flasgger import Swagger
 from flask import Flask, jsonify, render_template, request
 from git import Repo
-from prometheus_client import Counter, Gauge, Histogram, Summary, make_wsgi_app
+from prometheus_client import make_wsgi_app
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 sys.path.append(os.getcwd()[:-14])

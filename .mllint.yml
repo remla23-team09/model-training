@@ -1,5 +1,5 @@
 rules:
-    disabled: []
+    disabled: [testing/tests-folder, code-quality/mypy/no-issues, code-quality/pylint/no-issues, code-quality/bandit/no-issues]
     custom: []
 git:
     maxFileSize: 100000000

@@ -1,5 +1,6 @@
+"""Model development tests."""
 import joblib
-import pandas
+import pandas as pd
 import pytest
 
 from src.data.make_dataset import preprocess_test
@@ -8,18 +9,21 @@ from src.models.train_model import evaluate_model, train_model, train_model_load
 
 @pytest.fixture()
 def trained_model():
+    """Returns the trained model."""
     model = joblib.load("./models/sentiment_model.joblib")
     yield model
 
 
 @pytest.fixture()
 def test_data():
+    """Returns the restaurant reviews data."""
     test_file = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
-    data = pandas.read_csv(test_file, sep="\t", quoting=3)
+    data = pd.read_csv(test_file, sep="\t", quoting=3)
     yield data
 
 
 def test_nondeternism_robustness(trained_model):
+    """Test the nondeternism robustness of our trained model."""
     raw_data_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
     processed_data_filepath = "./data/processed/processed_data.joblib"
     original_score = evaluate_model(
@@ -33,6 +37,7 @@ def test_nondeternism_robustness(trained_model):
 
 
 def data_slice(trained_model, sliced_data):
+    """Compare the scores of our trained model with a model trained on the sliced data."""
     processed_data_filepath = "./data/raw/a1_RestaurantReviews_HistoricDump.tsv"
     raw_data_filepath = "./data/processed/processed_data.joblib"
     original_score = evaluate_model(
@@ -46,10 +51,12 @@ def data_slice(trained_model, sliced_data):
 
 
 def test_data_slice_negative(trained_model, test_data):
+    """The sliced data consists only of negative reviews."""
     sliced_data = test_data[test_data["Liked"] == 0].reset_index()
     assert data_slice(trained_model, sliced_data) <= 0.4
 
 
 def test_data_slice_positive(trained_model, test_data):
+    """The sliced data consists only of positive reviews."""
     sliced_data = test_data[test_data["Liked"] == 1].reset_index()
     assert data_slice(trained_model, sliced_data) <= 0.5

@@ -27,14 +27,9 @@ jobs:
           poetry check
       - name: Run code analysis
         run: poetry run mllint --output ./mllint_report.md
-      #- name: Run pylint
-      #  run: |
-      #    poetry run pylint --load-plugins=dslinter tests src
-      #- name: Save pytest results
-      #  uses: actions/upload-artifact@v3
-      #  with:
-      #    name: pylint-results
-      #    path: ./pylint_results/**
+      - name: Run pylint
+        run: |
+          poetry run pylint --load-plugins=dslinter tests src
       - name: Fetch dvc files
         run: poetry run dvc pull
       - name: Run pipeline

@@ -18,11 +18,12 @@ print(os.getcwd() + "/src/")
 
 from data.make_dataset import _load_data
 
+
 def classify(classifier, X_test, y_test):
     """Classify the test data with the trained model, and return accuracy."""
     y_pred = classifier.predict(X_test)
-    CM = confusion_matrix(y_test, y_pred)
-    print(CM)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
     return accuracy_score(y_test, y_pred)
 
 
@@ -30,7 +31,7 @@ def metrics(accuracy):
     """Print the accuracy metric in the json file."""
     json_object = json.dumps({"accuracy": accuracy})
     with open("naive-bayes.json", "w", encoding="utf-8") as outfile:
-         outfile.write(json_object)
+        outfile.write(json_object)
 
 
 @click.command()
