@@ -5,7 +5,7 @@ model-training
 
 ## Requirements
 Python version:
-- 3.9
+- 3.8 or 3.9
 
 ## How to run the pipeline
 Install poetry on Linux, macOS, Windows (WSL):
