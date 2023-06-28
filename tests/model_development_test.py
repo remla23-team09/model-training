@@ -1,10 +1,16 @@
 """Model development tests."""
 import joblib
-import pandas as pd
-import pytest
 
+import os
+import pytest
+import pandas as pd
+from joblib import load
+from sklearn.ensemble import RandomForestClassifier
+
+from src.models.train_random_forest import train_and_store_model
 from src.data.make_dataset import preprocess_test
 from src.models.train_model import evaluate_model, train_model, train_model_loaded_data
+from src.models.train_twt_roberta_model import train_and_store_twt_roberta_model
 
 
 @pytest.fixture()
@@ -60,3 +66,21 @@ def test_data_slice_positive(trained_model, test_data):
     """The sliced data consists only of positive reviews."""
     sliced_data = test_data[test_data["Liked"] == 1].reset_index()
     assert data_slice(trained_model, sliced_data) <= 0.5
+
+def test_train_and_store_twt_roberta_model(tmpdir):
+    model_output = os.path.join(tmpdir, "model.pickle")
+    train_and_store_twt_roberta_model(model_output)
+    # test the model output exists
+    assert os.path.exists(model_output)
+
+
+def test_train_and_store_model(tmpdir):
+    model_output = os.path.join(tmpdir, "random_forest_model.joblib")
+    train_and_store_model("./data/raw/a1_RestaurantReviews_HistoricDump.tsv", "./data/processed/processed_data.joblib", model_output, random_seed=42)
+    # test the model output exists
+    assert os.path.exists(model_output)
+
+
+    classifier = load(model_output)
+    # test the classifier is type of RandomForestClassifier
+    assert isinstance(classifier, RandomForestClassifier)

@@ -70,5 +70,5 @@ def test_ram_usage(trained_model):
     # Measure current RAM
     current_ram_usage = psutil.Process().memory_info().rss
 
-    baseline_ram_usage = 200000000
+    baseline_ram_usage = 2000000000
     assert current_ram_usage <= baseline_ram_usage

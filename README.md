@@ -49,10 +49,10 @@ To see a coverage report:
 - `poetry run pytest --cov=./src/ --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
 
 Screenshot of test report:
-![report](docs/report.JPG)
+![report](docs/test_pass_report.png)
 
 Screenshot of coverage report:
-![coverage](docs/coverage.JPG)
+![coverage](docs/coverage.png)
 
 
 
