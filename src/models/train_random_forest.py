@@ -11,7 +11,7 @@ from joblib import dump, load
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
-from src.data.make_dataset import _load_data
+from data.make_dataset import _load_data
 
 nltk.download("stopwords")
 
@@ -20,7 +20,6 @@ sys.path.append(os.getcwd() + "/src/")
 print(os.getcwd() + "/src/")
 
 pd.set_option("display.max_colwidth", None)
-
 
 
 
