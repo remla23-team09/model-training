@@ -1,13 +1,15 @@
 model-training
 ==============================
 
-Project containing the model for restaurant reviews sentiment analysis
-
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
-# How to run the pipeline
+## Requirements
+Python version:
+- 3.9
 
-TODO: add how to install poetry, or what poetry version is required
+## How to run the pipeline
+Install poetry on Linux, macOS, Windows (WSL):
+- `curl -sSL https://install.python-poetry.org | python3 - --version=1.5.0`
 
 Install dependencies:
 - `poetry install`
@@ -27,7 +29,15 @@ To see the difference in the accuracy metric:
 To see the experiment log:
 - `poetry run dvc exp show`
 
-# Tests
+## Code quality
+
+To run dslinter:
+- `poetry run pylint --load-plugins=dslinter tests src`
+
+To run mllint:
+- `poetry run mllint`, which will run all linters
+
+## Tests
 
 To run tests:
 - `poetry run pytest`
@@ -35,8 +45,8 @@ To run tests:
 To get a test report:
 - `poetry run pytest --html=report.html`, and open up report.html in your browser.
 
-To see a coverage report (adequacy metric): 
-- `poetry run pytest --cov=. --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
+To see a coverage report: 
+- `poetry run pytest --cov=./src/ --cov-report html:coverage_report`, and open the coverage_report\index.html in your browser
 
 Screenshot of test report:
 ![report](docs/report.JPG)
