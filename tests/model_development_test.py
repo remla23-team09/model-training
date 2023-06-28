@@ -1,7 +1,6 @@
 """Model development tests."""
-import joblib
-
 import os
+import joblib
 import pytest
 import pandas as pd
 from joblib import load
@@ -76,7 +75,8 @@ def test_train_and_store_twt_roberta_model(tmpdir):
 
 def test_train_and_store_model(tmpdir):
     model_output = os.path.join(tmpdir, "random_forest_model.joblib")
-    train_and_store_model("./data/raw/a1_RestaurantReviews_HistoricDump.tsv", "./data/processed/processed_data.joblib", model_output, random_seed=42)
+    train_and_store_model("./data/raw/a1_RestaurantReviews_HistoricDump.tsv",
+                          "./data/processed/processed_data.joblib", model_output, random_seed=42)
     # test the model output exists
     assert os.path.exists(model_output)
 
