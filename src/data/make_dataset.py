@@ -19,9 +19,9 @@ all_stopwords = stopwords.words("english")
 all_stopwords.remove("not")
 
 
-def _load_data(input_filepath):
-    with open(input_filepath, "r") as file:
-        reviews = pd.read_csv(file, sep="\t", quoting=3)
+def _load_data(input_filepath: str) -> pd.DataFrame:
+    with open(input_filepath, "r", encoding='utf-8') as file:
+        reviews: pd.DataFrame = pd.read_csv(file, sep="\t", quoting=3, dtype={"Review": str})
     return reviews
 
 
@@ -44,7 +44,8 @@ def _preprocess(reviews, output_filepath):
     preprocessed_data = count_vectorizer.fit_transform(corpus).toarray()
 
     bow_path = "data/interim/c1_BoW_Sentiment_Model.pkl"
-    pickle.dump(count_vectorizer, open(bow_path, "wb"))
+    with open(bow_path, "wb") as file:
+        pickle.dump(count_vectorizer, file)
 
     dump(preprocessed_data, output_filepath)
     return preprocessed_data
@@ -66,10 +67,10 @@ def prepare(review):
     """Preprocess the input reviews in the same way as the training data."""
 
     bag_of_words = "../../data/interim/c1_BoW_Sentiment_Model.pkl"
-    count_vectorizer = pickle.load(open(bag_of_words, "rb"))
+    with open(bag_of_words, "rb") as file:
+        count_vectorizer = pickle.load(file)
     processed_input = count_vectorizer.transform([review]).toarray()[0]
     return processed_input
-
 
 @click.command()
 @click.argument("input_filepath", type=click.Path(exists=True))
