@@ -38,7 +38,7 @@ def test_nondeternism_robustness(trained_model):
         model_variant_accuracy = train_model(
             raw_data_filepath, processed_data_filepath, seed
         )
-        assert abs(original_score - model_variant_accuracy) <= 0.4
+        assert abs(original_score - model_variant_accuracy) <= 0.3
 
 
 def data_slice(trained_model, sliced_data):
@@ -64,7 +64,7 @@ def test_data_slice_negative(trained_model, test_data):
 def test_data_slice_positive(trained_model, test_data):
     """The sliced data consists only of positive reviews."""
     sliced_data = test_data[test_data["Liked"] == 1].reset_index()
-    assert data_slice(trained_model, sliced_data) <= 0.5
+    assert data_slice(trained_model, sliced_data) <= 0.4
 
 def test_train_and_store_twt_roberta_model(tmpdir):
     model_output = os.path.join(tmpdir, "model.pickle")
